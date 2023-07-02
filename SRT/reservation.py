@@ -65,7 +65,7 @@ class SRTReservation:
         self.payment_date = pay["iseLmtDt"]
         self.payment_time = pay["iseLmtTm"]
 
-        self.paid = pay["stlFlg"] == "Y"  # 결제 여부
+        self.paid = train["stlFlg"] == "Y"  # 결제 여부
         self._tickets = tickets
 
     def __str__(self):

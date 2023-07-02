@@ -383,13 +383,19 @@ class SRT:
 
         train_data = parser.get_all()["trainListMap"]
         pay_data = parser.get_all()["payListMap"]
+        
         reservations = []
-        for train, pay in zip(train_data, pay_data):
-            if paid_only and pay["stlFlg"] == "N":  # paid_only가 참이면 결제된 예약내역만 보여줌
-                continue
+        i = 0
+        
+        for train in train_data:
             ticket = self.ticket_info(train["pnrNo"])
-            reservation = SRTReservation(train, pay, ticket)
-            reservations.append(reservation)
+            journey_count = train["jrnyCnt"]
+            for pay in pay_data[i:i+journey_count]:
+                if paid_only and pay["stlFlg"] == "N":  # paid_only가 참이면 결제된 예약내역만 보여줌
+                    continue
+                reservation = SRTReservation(train, pay, ticket)
+                reservations.append(reservation)
+            i += journey_count
 
         return reservations
 
@@ -418,7 +424,7 @@ class SRT:
 
         url = SRT_TICKET_INFO
         data = {"pnrNo": reservation, "jrnySqno": "1"}
-
+        # TODO: 입석+좌석 병합 예약의 경우, 처음 여정 티켓 정보만 불러오는 문제가 있음. 해결 필요.
         r = self._session.post(url=url, data=data)
         parser = SRTResponseData(r.text)
 
