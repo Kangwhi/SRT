@@ -1,5 +1,21 @@
 ## Unreleased
 
+- [SRT 열차운행 조정 알림](https://etk.srail.kr/cms/article/view.do?postNo=554&pageId=TK0502000000)에 따른 신규 정차역 코드 및 이름 추가.
+  ([#243](https://github.com/ryanking13/SRT/pull/243))
+
+## v2.0.8 (2023/08/02)
+
+- `search_train()` 메소드가 더이상 사용자의 로그인 여부를 확인하지 않음.
+  ([#238](https://github.com/ryanking13/SRT/pull/238))
+
+- Public API에 대한 static typing 추가
+  ([#234](https://github.com/ryanking13/SRT/pull/234))
+
+## v2.0.7 (2023/04/05)
+
+- get_reservations() 메소드에 결제된 예약 내역만 반환하도록 하는 payed_only 옵션 추가
+  ([#228](https://github.com/ryanking13/SRT/pull/228))
+
 ## v2.0.6 (2023/02/23)
 
 - 지제역 이름 변경 반영 ([#221](https://github.com/ryanking13/SRT/pull/221))
